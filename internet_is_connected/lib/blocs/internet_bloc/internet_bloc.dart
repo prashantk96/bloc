@@ -6,7 +6,7 @@ import 'package:internet_is_connected/blocs/internet_bloc/internet_event.dart';
 import 'package:internet_is_connected/blocs/internet_bloc/internet_state.dart';
 
 class InternetBloc extends Bloc<InternetEvent, InternetState> {
-  final Connectivity _connectivity = Connectivity();
+  Connectivity _connectivity = Connectivity();
   StreamSubscription? connectivitySubscription;
 
   InternetBloc() : super(InternetInitialState()) {
