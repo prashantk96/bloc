@@ -10,8 +10,26 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Center(
-        child: BlocBuilder<InternetBloc, InternetState>(
+      body: SafeArea(
+          child: Center(
+        child: BlocConsumer<InternetBloc, InternetState>(
+          listener: (context, state) {
+            if (state is InternetGainedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Internet Is Connected!"),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            } else if (state is InternetLostState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Internet Gone!"),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
           builder: (context, state) {
             if (state is InternetGainedState) {
               return const Text("Connected");
